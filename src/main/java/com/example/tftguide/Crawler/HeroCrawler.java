@@ -19,7 +19,6 @@ public class HeroCrawler {
 
     Logger logger = LoggerFactory.getLogger(HeroCrawler.class);
 
-    @Autowired
     public void crawlHeroList() {
 
         try {
@@ -44,6 +43,52 @@ public class HeroCrawler {
                         System.out.println(statName);
                         System.out.println(statValue);
                     }
+                    Elements baseStatElements = document.select(".guide-champion-detail__base-stat");
+                    for (Element baseStatElement : baseStatElements) {
+                        String baseStatName = baseStatElement.select(".guide-champion-detail__base-stat__name").text();
+                        String baseStatValue = baseStatElement.select(".guide-champion-detail__base-stat__value").text();
+                        if (baseStatValue.isEmpty()) {
+                            baseStatValue = String.valueOf(baseStatElement.select("img").attr("src"));
+                        }
+                        System.out.println(baseStatName);
+                        System.out.println(baseStatValue);
+                    }
+                    Elements skillElements = document.select(".guide-champion-detail__skill");
+                    for (Element skillElement : skillElements) {
+                        String skillImage = String.valueOf(skillElement.select("img").attr("src"));
+                        String skillName = String.valueOf(skillElement.select("img").attr("alt"));
+                        Elements manaElements = skillElements.select(".text-gray");
+                        String str = null;
+                        for (Element manaElement : manaElements) {
+                            String mana = String.valueOf(manaElement.select("span").text());
+                            str = String.join(",", mana);
+                            System.out.println(mana);
+                        }
+                        System.out.println(str);
+                        String skillInfo = skillElement.select(".d-block").text();
+                        System.out.println(skillInfo);
+                        String str2 = null;
+                        Elements damageElements = skillElements.select(".guide-champion-detail__skill__stats");
+                        for (Element damageElement : damageElements) {
+                            String damage = String.valueOf(damageElement.select("span").text());
+                            str2 = String.join(",", damage);
+                        }
+                        System.out.println(str2);
+                        System.out.println(manaElements);
+                        System.out.println(skillImage);
+                        System.out.println(skillName);
+
+                    }
+                    Elements itemsElements = document.select(".guide-champion-detail__recommend-items__content");
+                    Elements itemElements = itemsElements.select(".d-inline-block");
+                    for (Element itemElement : itemElements) {
+                        String itemName = itemElement.select("img").attr("alt");
+                        String itemPic = itemElement.select("img").attr("src");
+                        System.out.println(itemPic);
+                        System.out.println(itemName);
+                    }
+                    System.out.println(itemElements);
+
 
                 }
                 System.out.println(heroURL);
