@@ -46,6 +46,8 @@ public class HeroController {
         heroA.setSkillName(hero.getSkillName());
         heroA.setSkillImage(hero.getSkillImage());
         heroA.setSkillInfo(hero.getSkillInfo());
+        heroA.setMana(hero.getMana());
+        heroA.setStartingMana(hero.getStartingMana());
         heroA.setHeroStats(heroStats);
         heroA.setHeroBaseStats(heroBaseStats);
         heroA.setHeroRecomendedItems(heroRecomendedItems);

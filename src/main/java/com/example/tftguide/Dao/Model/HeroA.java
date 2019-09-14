@@ -15,6 +15,8 @@ public class HeroA {
     private String skillImage;
     private String skillInfo;
     private String damageValue;
+    private String mana;
+    private String startingMana;
     private List<HeroBaseStats> heroBaseStats;
     private List<HeroRecomendedItems> heroRecomendedItems;
     private List<HeroStats> heroStats;
@@ -101,5 +103,21 @@ public class HeroA {
 
     public void setHeroStats(List<HeroStats> heroStats) {
         this.heroStats = heroStats;
+    }
+
+    public String getMana() {
+        return mana;
+    }
+
+    public void setMana(String mana) {
+        this.mana = mana;
+    }
+
+    public String getStartingMana() {
+        return startingMana;
+    }
+
+    public void setStartingMana(String startingMana) {
+        this.startingMana = startingMana;
     }
 }

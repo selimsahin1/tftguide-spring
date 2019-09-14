@@ -11,6 +11,7 @@ public class HeroStats {
     private String heroName;
     private String statName;
     private String statValue;
+    private String imgSource;
 
     public Long getId() {
         return id;
@@ -42,5 +43,13 @@ public class HeroStats {
 
     public void setStatValue(String statValue) {
         this.statValue = statValue;
+    }
+
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
     }
 }

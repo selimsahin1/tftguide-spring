@@ -55,25 +55,62 @@ public class HeroCrawler {
                 String heroName = e1.select(".guide-champion-list__item__name").get(0).text();
                 hero.setName(heroName);
                 String imgSrc = String.valueOf(e1.select("img").attr("src"));
-                hero.setImage(imgSrc);
+                String img = "http:" + imgSrc;
+                hero.setImage(img);
                 html = new ProxyUtil().getHtmlPageFromUrlViaProxy(heroURL);
                 document = Jsoup.parse(html, "https://lolchess.gg");
                 Elements heroElements = document.select(HERO_HEADER);
                 for (Element heroElement : heroElements) {
                     String heroHeader = heroElement.select(".guide-champion-detail__header__background").attr("style");
-                    hero.setBackgroundPic(heroHeader);
+
+                    heroHeader = heroHeader.substring(heroHeader.indexOf("(") + 1);
+                    heroHeader = heroHeader.substring(0, heroHeader.indexOf(")"));
+
+                    hero.setBackgroundPic("http:" + heroHeader);
                     System.out.println(heroHeader);
                     Elements statsElements = document.select(".guide-champion-detail__stats__row");
                     for (Element statsElement : statsElements) {
-                        HeroStats heroStats = new HeroStats();
-                        heroStats.setHeroName(heroName);
-                        String statName = statsElement.select(".guide-champion-detail__stats__name").text();
-                        heroStats.setStatName(statName);
                         String statValue = statsElement.select(".guide-champion-detail__stats__value").text();
-                        heroStats.setStatValue(statValue);
-                        System.out.println(statName);
+                        String[] cost = statValue.split(" ");
+                        String imgs = String.valueOf(statsElement.select("img").attr("src"));
+
+                        boolean b = false;
+                        for (String s : cost
+                        ) {
+                            if (cost.length == 1) {
+                                HeroStats heroStats = new HeroStats();
+                                heroStats.setHeroName(heroName);
+                                heroStats.setImgSource("http:" + imgs);
+                                String statName = statsElement.select(".guide-champion-detail__stats__name").text();
+                                heroStats.setStatName(statName);
+                                heroStats.setStatName(statName);
+                                heroStats.setStatValue(s);
+                                heroStatsReporsitory.save(heroStats);
+
+                            } else {
+                                if (!b) {
+                                    HeroStats heroStats = new HeroStats();
+                                    heroStats.setHeroName(heroName);
+                                    String statName = statsElement.select(".guide-champion-detail__stats__name").text();
+                                    heroStats.setStatName(statName);
+                                    heroStats.setImgSource("http:" + imgs);
+                                    heroStats.setStatName(statName);
+                                    heroStats.setStatValue(s);
+                                    b = true;
+                                    heroStatsReporsitory.save(heroStats);
+                                } else {
+                                    HeroStats heroStats = new HeroStats();
+                                    heroStats.setHeroName(heroName);
+                                    String statName = statsElement.select(".guide-champion-detail__stats__name").text();
+                                    heroStats.setStatName(statName);
+                                    heroStats.setImgSource("http:" + imgs);
+                                    heroStats.setStatName("SellingCost");
+                                    heroStats.setStatValue(s);
+                                    heroStatsReporsitory.save(heroStats);
+                                }
+                            }
+                        }
                         System.out.println(statValue);
-                        heroStatsReporsitory.save(heroStats);
                     }
                     Elements baseStatElements = document.select(".guide-champion-detail__base-stat");
                     for (Element baseStatElement : baseStatElements) {
@@ -82,10 +119,21 @@ public class HeroCrawler {
                         heroBaseStats.setHeroName(heroName);
                         heroBaseStats.setBaseStatName(baseStatName);
                         String baseStatValue = baseStatElement.select(".guide-champion-detail__base-stat__value").text();
-                        if (baseStatValue.isEmpty()) {
+
+                        if (!baseStatValue.equals("")) {
+                            String[] s = baseStatValue.split(" ");
+                            String value = s[0];
+                            if (s.length > 3)
+                                for (int i = 1; i <= 4; i++) {
+                                    value = value + s[i];
+                                }
+                            heroBaseStats.setBaseStatValue(value);
+                        } else {
                             baseStatValue = String.valueOf(baseStatElement.select("img").attr("src"));
+                            heroBaseStats.setBaseStatValue("http:" + baseStatValue);
                         }
-                        heroBaseStats.setBaseStatValue(baseStatValue);
+
+
                         System.out.println(baseStatName);
                         System.out.println(baseStatValue);
                         heroBaseStatsRepository.save(heroBaseStats);
@@ -93,7 +141,8 @@ public class HeroCrawler {
                     Elements skillElements = document.select(".guide-champion-detail__skill");
                     for (Element skillElement : skillElements) {
                         String skillImage = String.valueOf(skillElement.select("img").attr("src"));
-                        hero.setSkillImage(skillImage);
+                        String sImage = "http:" + skillImage;
+                        hero.setSkillImage(sImage);
                         String skillName = String.valueOf(skillElement.select("img").attr("alt"));
                         hero.setSkillName(skillName);
                         Elements manaElements = skillElements.select(".text-gray");
@@ -101,7 +150,16 @@ public class HeroCrawler {
                         for (Element manaElement : manaElements) {
                             String mana = String.valueOf(manaElement.select("span").text());
                             str = String.join(",", mana);
-                            System.out.println(mana);
+                            String[] s = mana.split(" ");
+                            String[] manas = s[s.length - 1].split("/");
+                            try {
+                                hero.setMana(manas[1]);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            hero.setStartingMana(manas[0]);
+                            System.out.println(manas);
                         }
                         System.out.println(str);
                         String skillInfo = skillElement.select(".d-block").text();
@@ -128,12 +186,17 @@ public class HeroCrawler {
                         heroRecomendedItems.setHeroName(heroName);
                         heroRecomendedItems.setItemName(itemName);
                         String itemPic = itemElement.select("img").attr("src");
-                        heroRecomendedItems.setItemPic(itemPic);
+                        heroRecomendedItems.setItemPic("http:" + itemPic);
                         System.out.println(itemPic);
                         System.out.println(itemName);
                         heroRecomendedItemsRepository.save(heroRecomendedItems);
                     }
                     System.out.println(itemElements);
+
+                    Elements synergiesElements = document.select(".guide-champion-detail__synergies__content");
+                    for (Element synergiesElement : synergiesElements) {
+
+                    }
 
 
                 }

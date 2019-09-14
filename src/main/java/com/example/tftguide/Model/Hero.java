@@ -15,6 +15,8 @@ public class Hero {
     private String skillImage;
     private String skillInfo;
     private String damageValue;
+    private String mana;
+    private String startingMana;
 
     public Hero() {
     }
@@ -105,5 +107,21 @@ public class Hero {
 
     public void setDamageValue(String damageValue) {
         this.damageValue = damageValue;
+    }
+
+    public String getMana() {
+        return mana;
+    }
+
+    public void setMana(String mana) {
+        this.mana = mana;
+    }
+
+    public String getStartingMana() {
+        return startingMana;
+    }
+
+    public void setStartingMana(String startingMana) {
+        this.startingMana = startingMana;
     }
 }
