@@ -1,17 +1,13 @@
 package com.example.tftguide.Controller;
 
 import com.example.tftguide.Dao.Model.HeroA;
-import com.example.tftguide.Model.Hero;
-import com.example.tftguide.Model.HeroBaseStats;
-import com.example.tftguide.Model.HeroRecomendedItems;
-import com.example.tftguide.Model.HeroStats;
-import com.example.tftguide.Repository.HeroBaseStatsRepository;
-import com.example.tftguide.Repository.HeroRecomendedItemsRepository;
-import com.example.tftguide.Repository.HeroRepository;
-import com.example.tftguide.Repository.HeroStatsReporsitory;
+import com.example.tftguide.Dao.Model.SynergyHeroesA;
+import com.example.tftguide.Model.*;
+import com.example.tftguide.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,6 +25,18 @@ public class HeroController {
     @Autowired
     HeroStatsReporsitory heroStatsReporsitory;
 
+    @Autowired
+    SynergiesRepository synergiesRepository;
+
+    @Autowired
+    SynergyStatsRepository synergyStatsRepository;
+
+    @Autowired
+    SynergyHeroesRepository synergyHeroesRepository;
+
+    @Autowired
+    SynergyHeroesController synergyHeroesController;
+
     @RequestMapping(value = "/hero", method = RequestMethod.GET)
     @ResponseBody
     public HeroA getHero(@RequestParam(required = false) String name) {
@@ -36,6 +44,15 @@ public class HeroController {
         List<HeroBaseStats> heroBaseStats = heroBaseStatsRepository.findAllByHeroName(name);
         List<HeroRecomendedItems> heroRecomendedItems = heroRecomendedItemsRepository.findAllByHeroName(name);
         List<HeroStats> heroStats = heroStatsReporsitory.findAllByHeroName(name);
+        List<Synergies> synergies = synergiesRepository.findAllByHero(name);
+        List<SynergyHeroes> synergyHeroes = synergyHeroesRepository.findAllByHero(name);
+
+        List<SynergyHeroesA> synergyHeroesA = new ArrayList<>();
+        for (SynergyHeroes synergyHeroes1 : synergyHeroes
+        ) {
+            synergyHeroesA.add(synergyHeroesController.getSynergyHeroes(synergyHeroes1.getSynergy(), synergyHeroes1.getHero()));
+        }
+
 
         Hero hero = heroRepository.findByName(name);
         HeroA heroA = new HeroA();
@@ -51,6 +68,7 @@ public class HeroController {
         heroA.setHeroStats(heroStats);
         heroA.setHeroBaseStats(heroBaseStats);
         heroA.setHeroRecomendedItems(heroRecomendedItems);
+        heroA.setSynergyHeroesAS(synergyHeroesA);
 
         return heroA;
     }

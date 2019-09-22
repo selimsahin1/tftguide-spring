@@ -1,8 +1,6 @@
 package com.example.tftguide.Dao.Model;
 
-import com.example.tftguide.Model.HeroBaseStats;
-import com.example.tftguide.Model.HeroRecomendedItems;
-import com.example.tftguide.Model.HeroStats;
+import com.example.tftguide.Model.*;
 
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class HeroA {
     private List<HeroBaseStats> heroBaseStats;
     private List<HeroRecomendedItems> heroRecomendedItems;
     private List<HeroStats> heroStats;
+    private List<SynergyHeroesA> synergyHeroesAS;
 
     public HeroA() {
     }
@@ -119,5 +118,13 @@ public class HeroA {
 
     public void setStartingMana(String startingMana) {
         this.startingMana = startingMana;
+    }
+
+    public List<SynergyHeroesA> getSynergyHeroesAS() {
+        return synergyHeroesAS;
+    }
+
+    public void setSynergyHeroesAS(List<SynergyHeroesA> synergyHeroesAS) {
+        this.synergyHeroesAS = synergyHeroesAS;
     }
 }

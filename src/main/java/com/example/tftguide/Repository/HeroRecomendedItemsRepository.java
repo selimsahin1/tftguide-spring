@@ -12,4 +12,6 @@ public interface HeroRecomendedItemsRepository extends PagingAndSortingRepositor
 
     List<HeroRecomendedItems> findAllByHeroName(String heroName);
 
+    List<HeroRecomendedItems> findAllByItemName(String s);
+
 }

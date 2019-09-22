@@ -193,10 +193,6 @@ public class HeroCrawler {
                     }
                     System.out.println(itemElements);
 
-                    Elements synergiesElements = document.select(".guide-champion-detail__synergies__content");
-                    for (Element synergiesElement : synergiesElements) {
-
-                    }
 
 
                 }

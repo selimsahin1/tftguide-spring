@@ -1,6 +1,12 @@
 package com.example.tftguide.Crawler;
 
+import com.example.tftguide.Model.Synergies;
+import com.example.tftguide.Model.SynergyHeroes;
+import com.example.tftguide.Model.SynergyStats;
 import com.example.tftguide.Proxy.ProxyUtil;
+import com.example.tftguide.Repository.SynergiesRepository;
+import com.example.tftguide.Repository.SynergyHeroesRepository;
+import com.example.tftguide.Repository.SynergyStatsRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,8 +16,18 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+
 @Component
 public class SynergiesCrawler {
+
+    @Autowired
+    SynergiesRepository synergiesRepository;
+
+    @Autowired
+    SynergyHeroesRepository synergyHeroesRepository;
+
+    @Autowired
+    SynergyStatsRepository synergyStatsRepository;
 
     private final static String SYNERGIES_URL = "https://lolchess.gg/synergies";
 
@@ -32,20 +48,18 @@ public class SynergiesCrawler {
                 Elements heroesBlockElements = e1.select(".guide-synergy__champions");
                 Elements heroesElements = heroesBlockElements.get(0).select(".guide-synergy__champions .d-inline-block");
 
-                for (Element heroesElement : heroesElements
-                ) {
-                    String heroName = heroesElement.select(".name").text();
-                    String heroPic = heroesElement.select("img").attr("src");
-                    System.out.println(heroName);
-                }
 
                 String description = e1.select(".guide-synergy__description").text();
 
                 Elements statsElements = e1.select(".guide-synergy__stats .d-inline-block");
                 for (Element statsElement : statsElements
                 ) {
+                    SynergyStats synergyStats = new SynergyStats();
                     String statElement = statsElement.select(".d-inline-block").text();
+                    synergyStats.setSynergyName(synergyName);
+                    synergyStats.setStat(statElement);
                     System.out.println(statElement);
+                    synergyStatsRepository.save(synergyStats);
                 }
 
                 System.out.println(description);
@@ -55,6 +69,25 @@ public class SynergiesCrawler {
                 System.out.println(synergyName);
                 System.out.println(synergyIcon);
                 System.out.println("-----------------------------------------------------------------");
+
+                for (Element heroesElement : heroesElements
+                ) {
+                    Synergies synergies = new Synergies();
+
+                    SynergyHeroes synergyHeroes = new SynergyHeroes();
+                    synergies.setSynergyName(synergyName);
+                    synergies.setSynergyIcon("http:" + synergyIcon);
+                    synergies.setSynergyDescription(description);
+                    synergies.setSynergyDescription(description);
+                    String heroName = heroesElement.select(".name").text();
+                    synergyHeroes.setHero(heroName);
+                    synergyHeroes.setSynergy(synergyName);
+                    String heroPic = heroesElement.select("img").attr("src");
+                    System.out.println(heroName);
+                    synergyHeroesRepository.save(synergyHeroes);
+                    synergies.setHero(heroName);
+                    synergiesRepository.save(synergies);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
