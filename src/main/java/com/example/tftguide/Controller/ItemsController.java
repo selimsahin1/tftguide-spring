@@ -5,9 +5,7 @@ import com.example.tftguide.Model.Items;
 import com.example.tftguide.Repository.HeroRecomendedItemsRepository;
 import com.example.tftguide.Repository.ItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,25 @@ public class ItemsController {
 
     @Autowired
     HeroRecomendedItemsRepository heroRecomendedItemsRepository;
+
+    @RequestMapping(value = "/item", method = RequestMethod.GET)
+    @ResponseBody
+    public ItemsA getItem(@RequestParam(required = false) String name) {
+
+        Items item = itemsRepository.findByItemName(name);
+        ItemsA itemsA = new ItemsA();
+        itemsA.setItemName(item.getItemName());
+        itemsA.setItemCombImg1(item.getItemCombImg1());
+        itemsA.setItemCombImg2(item.getItemCombImg2());
+        itemsA.setItemCombination1(item.getItemCombination1());
+        itemsA.setItemCombination2(item.getItemCombination2());
+        itemsA.setItemDescription(item.getItemDescription());
+        itemsA.setItemDescription2(item.getItemDescription2());
+        itemsA.setItemImage(item.getItemImage());
+        String itemName = item.getItemName();
+        itemsA.setHeroRecomendedItems(heroRecomendedItemsRepository.findAllByItemName(itemName));
+        return itemsA;
+    }
 
     @RequestMapping(value = "/getAllItems", method = RequestMethod.GET)
     public List<ItemsA> getAllItems() {

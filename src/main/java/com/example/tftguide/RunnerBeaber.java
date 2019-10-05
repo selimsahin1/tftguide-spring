@@ -28,7 +28,7 @@ public class RunnerBeaber {
     @Scheduled(fixedRate = 2140000000)
     public void runit() throws InterruptedException, ExecutionException {
 //        heroCrawler.crawlHeroList();
-        deckCrawler.crawlDeckList();
+//        deckCrawler.crawlDeckList();
 //        synergiesCrawler.crawlSynergiesList();
 //        itemsCrawler.crawlItemsTR();
     }

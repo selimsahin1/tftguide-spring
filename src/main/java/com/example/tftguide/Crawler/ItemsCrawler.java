@@ -37,42 +37,42 @@ public class ItemsCrawler {
 
     public void crawlItemsTR() {
         try {
-//            for (int i = 1; i <= 100; i++) {
-//                String html = new ProxyUtil().getHtmlPageFromUrlViaProxy(ITEM_PAGE + i);
-//                Document document = Jsoup.parse(html, "https://lolchess.gg");
-//                Elements elements = document.getAllElements();
-//                String finisher = elements.select(".code").text();
-//                if (finisher.matches("404")) {
-//                    System.out.println("bitti");
-//                    break;
-//                } else {
-//                    Items items = new Items();
-//                    System.out.println(elements);
-//                    String itemName = elements.select(ITEM_NAME).text();
-//                    items.setItemName(itemName);
-//                    String itemDesc1 = elements.select(ITEM_DESC1).text();
-//                    items.setItemDescription(itemDesc1);
-//                    String itemDesc2 = elements.select(ITEM_DESC2).text();
-//                    items.setItemDescription2(itemDesc2);
-//                    Elements recomendedElements = elements.select(COMBINATION_ITEMS);
-//                    for (Element element : recomendedElements
-//                    ) {
-//                        String recomendedItem = element.select("img").attr("alt");
-//                        String recomendedItemImg = element.select("img").attr("src");
-//
-//                        if (items.getItemCombination1() == null) {
-//                            items.setItemCombination1(recomendedItem);
-//                            items.setItemCombImg1("http:" + recomendedItemImg);
-//                        } else {
-//                            items.setItemCombination2(recomendedItem);
-//                            items.setItemCombImg2("http:" + recomendedItemImg);
-//                        }
-//                        System.out.println(recomendedItem);
-//                        System.out.println(recomendedItemImg);
-//                    }
-//                    itemsRepository.save(items);
-//                }
-//            }
+            for (int i = 1; i <= 100; i++) {
+                String html = new ProxyUtil().getHtmlPageFromUrlViaProxy(ITEM_PAGE + i);
+                Document document = Jsoup.parse(html, "https://lolchess.gg");
+                Elements elements = document.getAllElements();
+                String finisher = elements.select(".code").text();
+                if (finisher.matches("404")) {
+                    System.out.println("bitti");
+                    break;
+                } else {
+                    Items items = new Items();
+                    System.out.println(elements);
+                    String itemName = elements.select(ITEM_NAME).text();
+                    items.setItemName(itemName);
+                    String itemDesc1 = elements.select(ITEM_DESC1).text();
+                    items.setItemDescription(itemDesc1);
+                    String itemDesc2 = elements.select(ITEM_DESC2).text();
+                    items.setItemDescription2(itemDesc2);
+                    Elements recomendedElements = elements.select(COMBINATION_ITEMS);
+                    for (Element element : recomendedElements
+                    ) {
+                        String recomendedItem = element.select("img").attr("alt");
+                        String recomendedItemImg = element.select("img").attr("src");
+
+                        if (items.getItemCombination1() == null) {
+                            items.setItemCombination1(recomendedItem);
+                            items.setItemCombImg1("http:" + recomendedItemImg);
+                        } else {
+                            items.setItemCombination2(recomendedItem);
+                            items.setItemCombImg2("http:" + recomendedItemImg);
+                        }
+                        System.out.println(recomendedItem);
+                        System.out.println(recomendedItemImg);
+                    }
+                    itemsRepository.save(items);
+                }
+            }
 
             String html = new ProxyUtil().getHtmlPageFromUrlViaProxy(ITEMS_URL);
             Document document = Jsoup.parse(html, "https://lolchess.gg");
