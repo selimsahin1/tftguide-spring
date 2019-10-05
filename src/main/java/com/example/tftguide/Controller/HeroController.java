@@ -74,8 +74,45 @@ public class HeroController {
     }
 
     @RequestMapping(value = "/heroList", method = RequestMethod.GET)
-    public List<Hero> getAllHeroes() {
-        return heroRepository.findAll();
+    public List<HeroA> getAllHeroes() {
+
+        List<HeroA> heroAList = new ArrayList<>();
+
+        List<Hero> heroList = heroRepository.findAll();
+
+        for (Hero hero : heroList
+        ) {
+            HeroA heroA = new HeroA();
+            heroA.setName(hero.getName());
+            heroA.setBackgroundPic(hero.getBackgroundPic());
+            heroA.setDamageValue(hero.getDamageValue());
+            heroA.setImage(hero.getImage());
+            heroA.setSkillName(hero.getSkillName());
+            heroA.setSkillImage(hero.getSkillImage());
+            heroA.setSkillInfo(hero.getSkillInfo());
+            heroA.setMana(hero.getMana());
+            heroA.setStartingMana(hero.getStartingMana());
+
+            List<HeroBaseStats> heroBaseStats = heroBaseStatsRepository.findAllByHeroName(hero.getName());
+            List<HeroRecomendedItems> heroRecomendedItems = heroRecomendedItemsRepository.findAllByHeroName(hero.getName());
+            List<HeroStats> heroStats = heroStatsReporsitory.findAllByHeroName(hero.getName());
+            List<Synergies> synergies = synergiesRepository.findAllByHero(hero.getName());
+            List<SynergyHeroes> synergyHeroes = synergyHeroesRepository.findAllByHero(hero.getName());
+
+            List<SynergyHeroesA> synergyHeroesA = new ArrayList<>();
+            for (SynergyHeroes synergyHeroes1 : synergyHeroes
+            ) {
+                synergyHeroesA.add(synergyHeroesController.getSynergyHeroes(synergyHeroes1.getSynergy(), synergyHeroes1.getHero()));
+            }
+            heroA.setHeroStats(heroStats);
+            heroA.setHeroBaseStats(heroBaseStats);
+            heroA.setHeroRecomendedItems(heroRecomendedItems);
+            heroA.setSynergyHeroesAS(synergyHeroesA);
+            heroAList.add(heroA);
+        }
+
+
+        return heroAList;
     }
 
 }

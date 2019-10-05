@@ -70,47 +70,53 @@ public class HeroCrawler {
                     System.out.println(heroHeader);
                     Elements statsElements = document.select(".guide-champion-detail__stats__row");
                     for (Element statsElement : statsElements) {
-                        String statValue = statsElement.select(".guide-champion-detail__stats__value").text();
-                        String[] cost = statValue.split(" ");
-                        String imgs = String.valueOf(statsElement.select("img").attr("src"));
-
-                        boolean b = false;
-                        for (String s : cost
+                        Elements statElements = statsElement.select("img");
+                        for (Element element : statElements
                         ) {
-                            if (cost.length == 1) {
-                                HeroStats heroStats = new HeroStats();
-                                heroStats.setHeroName(heroName);
-                                heroStats.setImgSource("http:" + imgs);
-                                String statName = statsElement.select(".guide-champion-detail__stats__name").text();
-                                heroStats.setStatName(statName);
-                                heroStats.setStatName(statName);
-                                heroStats.setStatValue(s);
-                                heroStatsReporsitory.save(heroStats);
+                            String statValue = element.attr("alt");
+                            String[] cost = statValue.split(" ");
+                            String imgs = String.valueOf(statsElement.select("img").attr("src"));
 
-                            } else {
-                                if (!b) {
+                            boolean b = false;
+                            for (String s : cost
+                            ) {
+                                if ((cost.length == 1)) {
                                     HeroStats heroStats = new HeroStats();
                                     heroStats.setHeroName(heroName);
+                                    heroStats.setImgSource("http:" + imgs);
+                                    heroStats.setHeroImg(img);
                                     String statName = statsElement.select(".guide-champion-detail__stats__name").text();
                                     heroStats.setStatName(statName);
-                                    heroStats.setImgSource("http:" + imgs);
-                                    heroStats.setStatName(statName);
                                     heroStats.setStatValue(s);
-                                    b = true;
                                     heroStatsReporsitory.save(heroStats);
+
                                 } else {
-                                    HeroStats heroStats = new HeroStats();
-                                    heroStats.setHeroName(heroName);
-                                    String statName = statsElement.select(".guide-champion-detail__stats__name").text();
-                                    heroStats.setStatName(statName);
-                                    heroStats.setImgSource("http:" + imgs);
-                                    heroStats.setStatName("SellingCost");
-                                    heroStats.setStatValue(s);
-                                    heroStatsReporsitory.save(heroStats);
+                                    if (!b) {
+                                        HeroStats heroStats = new HeroStats();
+                                        heroStats.setHeroName(heroName);
+                                        String statName = statsElement.select(".guide-champion-detail__stats__name").text();
+                                        heroStats.setStatName(statName);
+                                        heroStats.setImgSource("http:" + imgs);
+                                        heroStats.setStatName(statName);
+                                        heroStats.setStatValue(s);
+                                        b = true;
+                                        heroStatsReporsitory.save(heroStats);
+                                    } else {
+                                        HeroStats heroStats = new HeroStats();
+                                        heroStats.setHeroName(heroName);
+                                        String statName = statsElement.select(".guide-champion-detail__stats__name").text();
+                                        heroStats.setStatName(statName);
+                                        heroStats.setImgSource("http:" + imgs);
+                                        heroStats.setStatName("SellingCost");
+                                        heroStats.setStatValue(s);
+                                        heroStatsReporsitory.save(heroStats);
+                                    }
                                 }
                             }
+                            System.out.println(statValue);
+
                         }
-                        System.out.println(statValue);
+
                     }
                     Elements baseStatElements = document.select(".guide-champion-detail__base-stat");
                     for (Element baseStatElement : baseStatElements) {
@@ -192,7 +198,6 @@ public class HeroCrawler {
                         heroRecomendedItemsRepository.save(heroRecomendedItems);
                     }
                     System.out.println(itemElements);
-
 
 
                 }

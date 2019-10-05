@@ -60,10 +60,10 @@ public class Synergies {
     }
 
     public String getSynergyIcon() {
-        return "http:" + synergyIcon;
+        return synergyIcon;
     }
 
     public void setSynergyIcon(String synergyIcon) {
-        this.synergyIcon = "http:" + synergyIcon;
+        this.synergyIcon = synergyIcon;
     }
 }

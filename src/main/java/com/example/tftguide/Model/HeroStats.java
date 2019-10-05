@@ -9,6 +9,7 @@ public class HeroStats {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String heroName;
+    private String heroImg;
     private String statName;
     private String statValue;
     private String imgSource;
@@ -27,6 +28,14 @@ public class HeroStats {
 
     public void setHeroName(String heroName) {
         this.heroName = heroName;
+    }
+
+    public String getHeroImg() {
+        return heroImg;
+    }
+
+    public void setHeroImg(String heroImg) {
+        this.heroImg = heroImg;
     }
 
     public String getStatName() {
