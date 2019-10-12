@@ -50,7 +50,7 @@ public class DeckCrawler {
                 ) {
                     DeckSynergies deckSynergies = new DeckSynergies();
                     String traitPic = String.valueOf(traitElement.select("img").attr("src"));
-                    deckSynergies.setSynergyIcon(traitPic);
+                    deckSynergies.setSynergyIcon("http:" + traitPic);
                     String traitName = String.valueOf(traitElement.select("img").attr("alt"));
                     deckSynergies.setDeckSynergy(traitName);
                     deckSynergies.setDeckName(deckName);
@@ -64,7 +64,7 @@ public class DeckCrawler {
                 ) {
                     DeckHeroes deckHeroes = new DeckHeroes();
                     String heroPic = String.valueOf(heroElement.select("img").attr("src"));
-                    deckHeroes.setHeroIcon(heroPic);
+                    deckHeroes.setHeroIcon("http:" + heroPic);
                     String heroName = String.valueOf(heroElement.select("img").attr("alt"));
                     deckHeroes.setHeroName(heroName);
                     deckHeroes.setDeckName(deckName);
@@ -77,13 +77,13 @@ public class DeckCrawler {
                         String itemPic = String.valueOf(itemElement.select("img").attr("src"));
                         String itemName = String.valueOf(itemElement.select("img").attr("alt"));
                         System.out.println(itemName);
-                        System.out.println(itemPic);
+                        System.out.println("http:" + itemPic);
                     }
                     deckHeroesRepository.save(deckHeroes);
                 }
                 String cost = e1.select(".d-block").text();
                 String costImage = e1.select(".cost img").attr("src");
-                deck.setCostIcon(costImage);
+                deck.setCostIcon("http:" + costImage);
                 deck.setTotalCost(cost);
                 System.out.println(cost);
                 System.out.println(costImage);
@@ -95,7 +95,7 @@ public class DeckCrawler {
                 ) {
                     DeckBasicItems deckBasicItems = new DeckBasicItems();
                     String itemPic = String.valueOf(basicItemElement.select("img").attr("src"));
-                    deckBasicItems.setBasicItemIcon(itemPic);
+                    deckBasicItems.setBasicItemIcon("http:" + itemPic);
                     String itemName = String.valueOf(basicItemElement.select("img").attr("alt"));
                     deckBasicItems.setDeckName(deckName);
                     deckBasicItems.setBasicItemName(itemName);
@@ -108,8 +108,9 @@ public class DeckCrawler {
                 for (Element costElement : costElements
                 ) {
                     DeckCost deckCost = new DeckCost();
+                    deckCost.setDeckName(deckName);
                     String costPic = String.valueOf(costElement.select("img").attr("src"));
-                    deckCost.setCostIcon(costPic);
+                    deckCost.setCostIcon("http:" + costPic);
                     String costName = String.valueOf(costElement.select("img").attr("alt"));
                     deckCost.setCostName(costName);
                     System.out.println(costPic);

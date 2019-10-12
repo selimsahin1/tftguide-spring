@@ -21,6 +21,8 @@ public interface SynergiesRepository extends PagingAndSortingRepository<Synergie
 
     Synergies findFirstBySynergyName(String s);
 
+    List<Synergies> findAllBySynergyName(String s);
+
     @Transactional
     @Query(value = "select DISTINCT synergy_name from synergies", nativeQuery = true)
     List<String> findAllActiveUsers();

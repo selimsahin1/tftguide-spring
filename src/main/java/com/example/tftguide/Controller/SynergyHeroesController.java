@@ -79,5 +79,12 @@ public class SynergyHeroesController {
 
     }
 
+    @RequestMapping(value = "/synergy", method = RequestMethod.GET)
+    public Synergies getSynergies(@RequestParam(required = false) String name) {
+
+        return synergiesRepository.findFirstBySynergyName(name);
+
+    }
+
 
 }

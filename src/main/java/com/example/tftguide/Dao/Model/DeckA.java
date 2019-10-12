@@ -2,15 +2,20 @@ package com.example.tftguide.Dao.Model;
 
 import com.example.tftguide.Model.DeckBasicItems;
 import com.example.tftguide.Model.DeckCost;
+import com.example.tftguide.Model.Hero;
+import com.example.tftguide.Model.Synergies;
+
+import java.util.List;
 
 public class DeckA {
 
     private String name;
     private String costIcon;
     private String totalCost;
-    private ItemsA itemsA;
-    private DeckCost deckCost;
-    private SynergiesA synergiesA;
+    private List<ItemsA> itemsA;
+    private List<DeckCost> deckCost;
+    private List<Synergies> synergies;
+    private List<Hero> heroList;
 
 
     public String getName() {
@@ -37,27 +42,35 @@ public class DeckA {
         this.totalCost = totalCost;
     }
 
-    public ItemsA getItemsA() {
+    public List<ItemsA> getItemsA() {
         return itemsA;
     }
 
-    public void setItemsA(ItemsA itemsA) {
+    public void setItemsA(List<ItemsA> itemsA) {
         this.itemsA = itemsA;
     }
 
-    public DeckCost getDeckCost() {
+    public List<DeckCost> getDeckCost() {
         return deckCost;
     }
 
-    public void setDeckCost(DeckCost deckCost) {
+    public void setDeckCost(List<DeckCost> deckCost) {
         this.deckCost = deckCost;
     }
 
-    public SynergiesA getSynergiesA() {
-        return synergiesA;
+    public List<Synergies> getSynergies() {
+        return synergies;
     }
 
-    public void setSynergiesA(SynergiesA synergiesA) {
-        this.synergiesA = synergiesA;
+    public void setSynergies(List<Synergies> synergies) {
+        this.synergies = synergies;
+    }
+
+    public List<Hero> getHeroList() {
+        return heroList;
+    }
+
+    public void setHeroList(List<Hero> heroList) {
+        this.heroList = heroList;
     }
 }
