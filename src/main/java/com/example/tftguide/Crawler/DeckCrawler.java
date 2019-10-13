@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DeckCrawler {
@@ -37,6 +38,7 @@ public class DeckCrawler {
             String html = new ProxyUtil().getHtmlPageFromUrlViaProxy(DECK_URL);
             Document document = Jsoup.parse(html, "https://lolchess.gg");
             Elements elements = document.select(DECK_BOX);
+            List<String> deckHrefList = new ArrayList<>();
 
             for (Element e1 : elements
             ) {
@@ -121,11 +123,61 @@ public class DeckCrawler {
                     System.out.println(costCount);
                 }
                 deckRepository.save(deck);
+
+//                String detailUrl = e1.select(".mr-3 a").attr("href");
+//                crawlDeckDetail(detailUrl);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public void crawlDeckDetail(String url) throws IOException {
+
+        String html = new ProxyUtil().getHtmlPageFromUrlViaProxy("https://lolchess.gg/builder?deck=b142f230e00f11e996b4ff1dab80a464&hl=en-US");
+        Document document = Jsoup.parse(html, DECK_URL);
+        Elements elements = document.select(".tft-champion--80");
+        for (Element e1 : elements
+        ) {
+            if (e1.select("drag") != null) {
+                Elements dragElements = e1.select("drag");
+                String heroName = dragElements.select("img").attr("alt");
+                String heroCost = dragElements.select("span").text();
+
+                Elements classesElements = e1.select(".classes-or-origins");
+                Elements classElements = classesElements.select("tft-hexagon");
+                for (Element classElement : classElements
+                ) {
+                    String className = classElement.select("img").attr("alt");
+                }
+                Elements itemsElements = e1.select(".items");
+                for (Element itemsElement : itemsElements
+                ) {
+                    String itemName = itemsElement.select("img").attr("alt");
+                }
+            }
+        }
+        Elements synergiesElements = document.select(".p-2.mb-2");
+        for (Element synergiesElement : synergiesElements
+        ) {
+            String synergyName = synergiesElement.select("img").attr("alt");
+            String activeStat = synergiesElement.select(".active-stack").text();
+            if (synergiesElement.select(".text-gray span") != null) {
+                Elements activityLevelElements = synergiesElement.select(".text-gray span");
+                for (Element activityLevelElement : activityLevelElements
+                ) {
+                    String activityLevel = activityLevelElement.select("span").text();
+                }
+            } else {
+                Elements activityLevelElements = synergiesElement.select(".text-gray");
+                for (Element activityLevelElement : activityLevelElements
+                ) {
+                    String activityLevel = activityLevelElement.select(".text-gray").text();
+                }
+            }
+
+        }
     }
 }
