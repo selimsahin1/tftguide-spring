@@ -1,9 +1,11 @@
 package com.example.tftguide.Dao.Model;
 
 import com.example.tftguide.Model.HeroRecomendedItems;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemsA {
 
     private String itemName;

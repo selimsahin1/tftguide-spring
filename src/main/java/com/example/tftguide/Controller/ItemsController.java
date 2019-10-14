@@ -55,8 +55,8 @@ public class ItemsController {
             itemsA.setItemDescription(item.getItemDescription());
             itemsA.setItemDescription2(item.getItemDescription2());
             itemsA.setItemImage(item.getItemImage());
-            String itemName = item.getItemName();
-            itemsA.setHeroRecomendedItems(heroRecomendedItemsRepository.findAllByItemName(itemName));
+//            String itemName = item.getItemName();
+//            itemsA.setHeroRecomendedItems(heroRecomendedItemsRepository.findAllByItemName(itemName));
             itemsAList.add(itemsA);
         }
         return itemsAList;

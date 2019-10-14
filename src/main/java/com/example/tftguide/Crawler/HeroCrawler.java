@@ -70,10 +70,10 @@ public class HeroCrawler {
                     System.out.println(heroHeader);
                     Elements statsElements = document.select(".guide-champion-detail__stats__row");
                     for (Element statsElement : statsElements) {
-                        Elements statElements = statsElement.select("img");
+                        Elements statElements = statsElement.select(".guide-champion-detail__stats__value");
                         for (Element element : statElements
                         ) {
-                            String statValue = element.attr("alt");
+                            String statValue = element.text();
                             String[] cost = statValue.split(" ");
                             String imgs = String.valueOf(statsElement.select("img").attr("src"));
 

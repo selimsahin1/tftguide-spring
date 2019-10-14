@@ -1,7 +1,10 @@
 package com.example.tftguide.Model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "HeroRecomendItems")
 public class HeroRecomendedItems {
