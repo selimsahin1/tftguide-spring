@@ -10,6 +10,7 @@ public class SynergyHeroes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String synergy;
