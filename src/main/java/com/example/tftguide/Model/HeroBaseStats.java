@@ -11,8 +11,11 @@ public class HeroBaseStats {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String heroName;
+    @Column(columnDefinition = "TEXT")
     private String baseStatName;
+    @Column(columnDefinition = "TEXT")
     private String baseStatValue;
 
     public Long getId() {

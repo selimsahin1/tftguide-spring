@@ -11,8 +11,11 @@ public class HeroRecomendedItems {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String heroName;
+    @Column(columnDefinition = "TEXT")
     private String itemName;
+    @Column(columnDefinition = "TEXT")
     private String itemPic;
 
     public Long getId() {

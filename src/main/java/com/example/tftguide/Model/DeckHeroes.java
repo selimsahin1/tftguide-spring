@@ -9,8 +9,11 @@ public class DeckHeroes {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String heroName;
+    @Column(columnDefinition = "TEXT")
     private String heroIcon;
+    @Column(columnDefinition = "TEXT")
     private String deckName;
 
     public Long getId() {

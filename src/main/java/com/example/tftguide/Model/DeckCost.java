@@ -9,9 +9,13 @@ public class DeckCost {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String costName;
+    @Column(columnDefinition = "TEXT")
     private String costIcon;
+    @Column(columnDefinition = "TEXT")
     private String costCount;
+    @Column(columnDefinition = "TEXT")
     private String deckName;
 
     public Long getId() {

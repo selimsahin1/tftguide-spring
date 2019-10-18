@@ -11,14 +11,23 @@ public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String image;
+    @Column(columnDefinition = "TEXT")
     private String backgroundPic;
+    @Column(columnDefinition = "TEXT")
     private String skillName;
+    @Column(columnDefinition = "TEXT")
     private String skillImage;
+    @Column(columnDefinition = "TEXT")
     private String skillInfo;
+    @Column(columnDefinition = "TEXT")
     private String damageValue;
+    @Column(columnDefinition = "TEXT")
     private String mana;
+    @Column(columnDefinition = "TEXT")
     private String startingMana;
 
     public Hero() {

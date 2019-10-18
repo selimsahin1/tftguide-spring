@@ -11,11 +11,16 @@ public class Synergies {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String hero;
+    @Column(columnDefinition = "TEXT")
     private String synergyName;
+    @Column(columnDefinition = "TEXT")
     private String synergyDescription;
+    @Column(columnDefinition = "TEXT")
     @JsonIgnore
     private String synergyStats;
+    @Column(columnDefinition = "TEXT")
     private String synergyIcon;
 
 

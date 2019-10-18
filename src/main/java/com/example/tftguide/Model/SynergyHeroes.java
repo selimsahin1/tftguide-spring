@@ -11,7 +11,9 @@ public class SynergyHeroes {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String synergy;
+    @Column(columnDefinition = "TEXT")
     private String hero;
 
     public Long getId() {

@@ -9,13 +9,21 @@ public class Items {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String itemName;
+    @Column(columnDefinition = "TEXT")
     private String itemImage;
+    @Column(columnDefinition = "TEXT")
     private String itemDescription;
+    @Column(columnDefinition = "TEXT")
     private String itemDescription2;
+    @Column(columnDefinition = "TEXT")
     private String itemCombination1;
+    @Column(columnDefinition = "TEXT")
     private String itemCombination2;
+    @Column(columnDefinition = "TEXT")
     private String itemCombImg1;
+    @Column(columnDefinition = "TEXT")
     private String itemCombImg2;
 
     public Long getId() {

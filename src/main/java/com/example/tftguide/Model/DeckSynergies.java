@@ -9,8 +9,11 @@ public class DeckSynergies {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String deckSynergy;
+    @Column(columnDefinition = "TEXT")
     private String synergyIcon;
+    @Column(columnDefinition = "TEXT")
     private String deckName;
 
     public Long getId() {

@@ -8,10 +8,15 @@ public class HeroStats {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String heroName;
+    @Column(columnDefinition = "TEXT")
     private String heroImg;
+    @Column(columnDefinition = "TEXT")
     private String statName;
+    @Column(columnDefinition = "TEXT")
     private String statValue;
+    @Column(columnDefinition = "TEXT")
     private String imgSource;
 
     public Long getId() {
