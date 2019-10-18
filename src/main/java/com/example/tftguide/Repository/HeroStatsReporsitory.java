@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface HeroStatsReporsitory extends PagingAndSortingRepository<HeroStats, Long> {
 
+    @Override
+    void deleteAll();
+
     List<HeroStats> findAllByHeroName(String heroName);
 
     @Query(value = "select * from hero_stats WHERE stat_value= :stat_value",

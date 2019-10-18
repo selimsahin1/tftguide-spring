@@ -11,4 +11,6 @@ public interface HeroBaseStatsRepository extends PagingAndSortingRepository<Hero
 
     List<HeroBaseStats> findAllByHeroName(String heroName);
 
+    @Override
+    void deleteAll();
 }

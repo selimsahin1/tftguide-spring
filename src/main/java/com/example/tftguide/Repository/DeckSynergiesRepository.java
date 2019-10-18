@@ -12,4 +12,6 @@ public interface DeckSynergiesRepository extends PagingAndSortingRepository<Deck
 
     List<DeckSynergies> findAllByDeckName(String s);
 
+    @Override
+    void deleteAll();
 }

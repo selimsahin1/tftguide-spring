@@ -14,5 +14,6 @@ public interface SynergyHeroesRepository extends PagingAndSortingRepository<Syne
     @Transactional
     List<SynergyHeroes> findAllByHero(String heroName);
 
-
+    @Override
+    void deleteAll();
 }

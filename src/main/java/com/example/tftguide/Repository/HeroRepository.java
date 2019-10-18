@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface HeroRepository extends PagingAndSortingRepository<Hero, Long> {
 
+    @Override
+    void deleteAll();
+
     @Transactional
     Hero findByName(String name);
 

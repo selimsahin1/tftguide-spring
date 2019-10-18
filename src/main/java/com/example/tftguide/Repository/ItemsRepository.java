@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface ItemsRepository extends PagingAndSortingRepository<Items, Long> {
 
+    @Override
+    void deleteAll();
+
     Items findByItemName(String s);
 
     List<Items> findAll();

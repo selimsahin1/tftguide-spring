@@ -129,4 +129,5 @@ public class HeroA {
     public void setSynergyHeroesAS(List<SynergyHeroesA> synergyHeroesAS) {
         this.synergyHeroesAS = synergyHeroesAS;
     }
+
 }

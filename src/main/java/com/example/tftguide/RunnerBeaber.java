@@ -4,6 +4,7 @@ import com.example.tftguide.Crawler.DeckCrawler;
 import com.example.tftguide.Crawler.HeroCrawler;
 import com.example.tftguide.Crawler.ItemsCrawler;
 import com.example.tftguide.Crawler.SynergiesCrawler;
+import com.example.tftguide.Repository.SynergiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -25,12 +26,19 @@ public class RunnerBeaber {
     @Autowired
     ItemsCrawler itemsCrawler;
 
+    @Autowired
+    SynergiesRepository synergiesRepository;
+
+    @Autowired
+    DatabaseTruncate databaseTruncate;
+
     @Scheduled(fixedRate = 2140000000)
     public void runit() throws InterruptedException, ExecutionException {
-        heroCrawler.crawlHeroList();
-        deckCrawler.crawlDeckList();
-        synergiesCrawler.crawlSynergiesList();
-        itemsCrawler.crawlItemsTR();
+//        databaseTruncate.truncator();
+//        heroCrawler.crawlHeroList();
+//        deckCrawler.crawlDeckList();
+//        synergiesCrawler.crawlSynergiesList();
+//        itemsCrawler.crawlItemsTR();
     }
 
 }

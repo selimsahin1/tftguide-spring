@@ -23,4 +23,6 @@ public interface DeckRepository extends PagingAndSortingRepository<Deck, Long> {
     @Query(value = FIND_ALL_TIERS, nativeQuery = true)
     List<String> getAllTierName();
 
+    @Override
+    void deleteAll();
 }

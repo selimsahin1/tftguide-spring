@@ -18,6 +18,6 @@ public interface SynergyStatsRepository extends PagingAndSortingRepository<Syner
     @Transactional
     List<SynergyStats> findAllBySynergyName(String s);
 
-
-
+    @Override
+    void deleteAll();
 }

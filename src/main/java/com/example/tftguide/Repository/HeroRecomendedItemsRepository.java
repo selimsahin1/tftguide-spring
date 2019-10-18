@@ -14,4 +14,6 @@ public interface HeroRecomendedItemsRepository extends PagingAndSortingRepositor
 
     List<HeroRecomendedItems> findAllByItemName(String s);
 
+    @Override
+    void deleteAll();
 }

@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface DeckCostRepository extends PagingAndSortingRepository<DeckCost, Long> {
 
+    @Override
+    void deleteAll();
+
     List<DeckCost> findAllByDeckName(String s);
 
 }
