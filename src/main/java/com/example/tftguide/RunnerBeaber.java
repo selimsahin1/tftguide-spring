@@ -32,13 +32,15 @@ public class RunnerBeaber {
     @Autowired
     DatabaseTruncate databaseTruncate;
 
-    @Scheduled(fixedRate = 2140000000)
+    @Scheduled(cron = "0 0 1 ? * *")
     public void runit() throws InterruptedException, ExecutionException {
-//        databaseTruncate.truncator();
-//        heroCrawler.crawlHeroList();
-//        deckCrawler.crawlDeckList();
-//        synergiesCrawler.crawlSynergiesList();
-//        itemsCrawler.crawlItemsTR();
+        System.out.println("--------------------------DATABASE YENILENIYOR---------------------");
+        databaseTruncate.truncator();
+        heroCrawler.crawlHeroList();
+        deckCrawler.crawlDeckList();
+        synergiesCrawler.crawlSynergiesList();
+        itemsCrawler.crawlItemsTR();
+        System.out.println("--------------------------DATABASE YENILEME BITTI---------------------");
     }
 
 }
