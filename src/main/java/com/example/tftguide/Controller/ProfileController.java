@@ -46,7 +46,7 @@ public class ProfileController {
             String[] arrOfLoses = loses.split(" ", 2);
             profileA.setLoses(arrOfLoses[0]);
             profileA.setLosesChanged((arrOfLoses.length == 2) ? arrOfLoses[1] : "");
-            String winRate = element.select(".losses dd").text();
+            String winRate = element.select(".winrate-pc dd").text();
             String[] arrOfWinRate = winRate.split(" ", 2);
             profileA.setWinRate(arrOfWinRate[0]);
             profileA.setWinRateChanged((arrOfWinRate.length == 2) ? arrOfWinRate[1] : "");
@@ -65,11 +65,10 @@ public class ProfileController {
             profileSummaryA.setTierPercent(element.select(".top-percent").text());
             profileSummaryA.setPlayed(element.select(".col-6:nth-child(1) .float-right").text());
             profileSummaryA.setPlayedPercent(element.select(".col-6:nth-child(1) .profile__tier__stat__text").text());
-            profileSummaryA.setWinRate(element.select(".col-6:nth-child(3) .float-right").text());
+            profileSummaryA.setWinRate(element.select(".col-6:nth-child(2) .float-right").text());
             profileSummaryA.setWinRatePercent(element.select(".col-6:nth-child(2) .profile__tier__stat__text").text());
             profileSummaryA.setWins(element.select(".col-6:nth-child(3) .float-right").text());
-            profileSummaryA.setWinsPercent(element.select(".col-6:nth-child(1) .profile__tier__stat__text").text());
-            profileSummaryA.setWinRate(element.select(".col-6:nth-child(3) .profile__tier__stat__text").text());
+            profileSummaryA.setWinsPercent(element.select(".col-6:nth-child(3) .profile__tier__stat__text").text());
             profileSummaryA.setLoses(element.select(".col-6:nth-child(4) .float-right").text());
             profileSummaryA.setLosesPercent(element.select(".col-6:nth-child(4) .profile__tier__stat__text").text());
 
