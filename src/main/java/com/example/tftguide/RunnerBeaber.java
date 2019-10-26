@@ -32,6 +32,7 @@ public class RunnerBeaber {
     @Autowired
     DatabaseTruncate databaseTruncate;
 
+//    @Scheduled(fixedRate = 2140000000)
     @Scheduled(cron = "0 0 1 ? * *")
     public void runit() throws InterruptedException, ExecutionException {
         System.out.println("--------------------------DATABASE YENILENIYOR---------------------");
