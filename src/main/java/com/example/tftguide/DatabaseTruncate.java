@@ -1,6 +1,6 @@
 package com.example.tftguide;
 
-import com.example.tftguide.Repository.*;
+import com.example.tftguide.teamfighttactics.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
