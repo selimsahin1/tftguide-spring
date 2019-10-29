@@ -14,6 +14,6 @@ public interface LoRDeckRepository extends PagingAndSortingRepository<Deck, Long
 
     @Transactional
     @Query(value = "select * FROM lordeck where deck_name LIKE %?1%", nativeQuery = true)
-    Deck findByDeckName(String name);
+    List<Deck> findByDeckName(String name);
 
 }

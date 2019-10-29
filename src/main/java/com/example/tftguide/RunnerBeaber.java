@@ -40,17 +40,17 @@ public class RunnerBeaber {
     @Autowired
     LoRDeckCrawler lordeckCrawler;
 
-    @Scheduled(fixedRate = 2140000000)
-//    @Scheduled(cron = "0 0 1 ? * *")
+//    @Scheduled(fixedRate = 2140000000)
+    @Scheduled(cron = "0 0 1 ? * *")
     public void runit() throws InterruptedException, ExecutionException {
         System.out.println("--------------------------DATABASE YENILENIYOR---------------------");
         lordeckCrawler.getAllDecks();
         loRCardCrawler.getAllCards();
-//        databaseTruncate.truncator();
-//        heroCrawler.crawlHeroList();
-//        deckCrawler.crawlDeckList();
-//        synergiesCrawler.crawlSynergiesList();
-//        itemsCrawler.crawlItemsTR();
+        databaseTruncate.truncator();
+        heroCrawler.crawlHeroList();
+        deckCrawler.crawlDeckList();
+        synergiesCrawler.crawlSynergiesList();
+        itemsCrawler.crawlItemsTR();
         System.out.println("--------------------------DATABASE YENILEME BITTI---------------------");
     }
 

@@ -60,8 +60,9 @@ public class LoRCardController {
         List<Deck> deckList = new ArrayList<>();
         for (RecomendedDecksWithCard recomendedDecksWithCard : recomendedDecksWithCards
         ) {
-            Deck deck = loRDeckRepository.findByDeckName(recomendedDecksWithCard.getDeckName());
-            deckList.add(deck);
+            System.out.println(recomendedDecksWithCard.getDeckName());
+            List<Deck> deck = loRDeckRepository.findByDeckName(recomendedDecksWithCard.getDeckName());
+            deckList.add(deck.get(0));
         }
         CardA cardA = new CardA();
         cardA.setCard(card.get(0));
